@@ -9,11 +9,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float xValue;
 
-    public UnityEvent<Vector3> StepOnPlatform;
+    private UnityEvent StepOnPlatform;
 
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        StepOnPlatform.AddListener(Camera.main.GetComponent<CameraBrain>().SetOnPosition);
     }
 
     private void FixedUpdate()
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.layer == 6 && rb.linearVelocity.y < 0f)
         {
             Jump();
-            StepOnPlatform.Invoke(collision.transform.position);
+            StepOnPlatform.Invoke();
         }
     }
 

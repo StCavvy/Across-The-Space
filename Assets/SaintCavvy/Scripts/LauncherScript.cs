@@ -8,15 +8,14 @@ public class LauncherScript : MonoBehaviour
     private float jumpHeight;
     private float gravityForce;
 
-
-
-    public UnityEvent Launched;
+    private UnityEvent Launched;
 
     private void Start()
     {
         Destination = transform.GetChild(0);
         jumpHeight = Destination.position.y - transform.position.y;
         gravityForce = -Physics.gravity.y;
+        Launched.AddListener(Camera.main.GetComponent<CameraBrain>().FollowMode);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

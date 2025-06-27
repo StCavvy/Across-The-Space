@@ -2,12 +2,6 @@ using UnityEngine;
 
 public class PlatformBehaviour : MonoBehaviour
 {
-
-
-    private void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider != null && collider.tag == "Player")

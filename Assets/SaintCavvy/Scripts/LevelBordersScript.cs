@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class LevelBordersScript : MonoBehaviour
 {
-    [SerializeField] private Transform player;
     [SerializeField] private GameObject leftBorder;
     [SerializeField] private GameObject rightBorder;
     [SerializeField] private float borderOfScreenOffset;
+    private Transform player;
     private Vector2 leftBorderPos;
     private Vector2 rightBorderPos;
     private Vector2 bordersPos;
@@ -13,6 +13,7 @@ public class LevelBordersScript : MonoBehaviour
     void Start()
     {
         screenRadius = (Camera.main.orthographicSize * Camera.main.aspect) + borderOfScreenOffset;
+        player = GameObject.FindWithTag("Player").transform;
         bordersPos = new Vector2(0, player.position.y);
         SetBorders();
     }

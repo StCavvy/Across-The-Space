@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraBrain : MonoBehaviour
 {
     [SerializeField] private float yOffset;
-    [SerializeField] private GameObject player;
+    private GameObject player;
     public float CameraSpeed;
     private Vector3 dir;
 
@@ -18,6 +18,7 @@ public class CameraBrain : MonoBehaviour
     private void Start()
     {
         dir = new Vector3(0f, 0f, -10f);
+        player = GameObject.FindWithTag("Player");
     }
 
     private void FixedUpdate()
