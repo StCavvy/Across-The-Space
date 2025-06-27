@@ -2,7 +2,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using UnityEngine;
 
-public class PayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float thrust = 5f;
@@ -16,15 +16,14 @@ public class PayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(xValue * moveSpeed, rb.linearVelocity.y);
-        Debug.Log(xValue);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 6)
+        if (collision.gameObject.layer == 6 && rb.linearVelocity.y < 0f)
         {
             Jump();
             StepOnPlatform.Invoke(collision.transform.position);
@@ -32,7 +31,7 @@ public class PayerController : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {   
         rb.AddForce(Vector2.up * thrust, ForceMode2D.Impulse);
     }
     public void ProcessMovement(InputAction.CallbackContext context)

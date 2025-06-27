@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class PlatformBehaviour : MonoBehaviour
 {
+
+
+    private void Update()
+    {
+        
+    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider != null && collider.tag == "Player")
         {
-            ChangeState(DefinePLayerPos(collider));
+            ChangeState(isAbove(collider));
         }
     }
     private void ChangeState(bool state)
@@ -14,10 +20,11 @@ public class PlatformBehaviour : MonoBehaviour
         gameObject.GetComponent<BoxCollider2D>().enabled = state;
     }
 
-    private bool DefinePLayerPos(Collider2D Player)
+    private bool isAbove(Collider2D Player)
     {
+        float playerHeigth = Player.transform.localScale.y / 2;
         bool isAbove;
-        if (gameObject.transform.position.y < Player.transform.position.y)
+        if (gameObject.transform.position.y < Player.transform.position.y - playerHeigth)
         {
             isAbove = true;
         }
